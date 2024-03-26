@@ -13,7 +13,10 @@ amidtoken:
 	docker run --rm -v ${PWD}/contract:/sources ethereum/client-go:alltools-v1.11.2 abigen --abi /sources/PROFIContract.abi --bin /sources/PROFIContract.bin --pkg contract --out /sources/PROFIContract.go
 	docker run --rm -v ${PWD}/contract:/sources ethereum/client-go:alltools-v1.11.2 abigen --abi /sources/NFTContract.abi --bin /sources/NFTContract.bin --pkg nft --out /sources/nft/NFTContract.go
 	sudo chmod 777 contract/*
-	docker-compose up -d 
+	docker compose up -d
+clear:
+	docker compose down
+	docker rmi prof-1-api
 stop:
-	docker-compose down
+	docker compose down
 	docker image rm testcheckdimaplz_api

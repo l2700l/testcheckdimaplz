@@ -46,7 +46,14 @@ func main() {
 
 	c.LoadHTMLGlob("templates/*")
 
+	c.Static("/js", "./node_modules/ethers/dist")
+	c.Static("/nfts", "./nfts")
+
 	c.GET("/", func(context *gin.Context) {
+		context.HTML(http.StatusOK, "prelogin.html", gin.H{})
+	})
+
+	c.GET("/login", func(context *gin.Context) {
 		context.HTML(http.StatusOK, "login.html", gin.H{})
 	})
 	c.POST("/login", func(context *gin.Context) {
@@ -100,6 +107,7 @@ func main() {
 		addr := context.Query("addr")
 		collectionId, _ := strconv.ParseInt(context.Query("collectionId"), 0, 64)
 		nfts := GetAllNft(big.NewInt(collectionId))
+		fmt.Printf("%v", nfts)
 		context.HTML(http.StatusOK, "nft.html", gin.H{
 			"collectionId": collectionId,
 			"addr":         addr,
@@ -135,41 +143,49 @@ func main() {
 	c.Run("0.0.0.0:1212")
 }
 
-func GetAllNftCollections() []*NFTCollection {
+func GetAllNftCollections() []NFTCollection {
 	var index int64 = 0
-	collections := make([]*NFTCollection, 0)
+	collections := make([]NFTCollection, 0)
 	for {
 		col, err := GetNftCollectionById(index)
 		if err != nil {
 			break
 		}
-		collections = append(collections, &col)
+		collections = append(collections, col)
 		index++
 	}
 	return collections
 }
 
-func GetNftCollectionById(id int64) (NFTCollection, error) {
-	return utils.NFTContract.Collection(utils.DefaultCallOpts(), big.NewInt(id))
+func GetNftCollectionById(uid int64) (NFTCollection, error) {
+	id, err := utils.NFTContract.Collections(utils.DefaultCallOpts(), big.NewInt(uid))
+	if err != nil {
+		return NFTCollection{}, err
+	}
+	return utils.NFTContract.Collection(utils.DefaultCallOpts(), id)
 }
 
-func GetAllNft(collectionId *big.Int) []*NFT {
+func GetAllNft(collectionId *big.Int) []NFT {
 	var index int64 = 0
-	nfts := make([]*NFT, 0)
+	nfts := make([]NFT, 0)
 	for {
 		nft, err := GetNFTById(index)
 		if err != nil {
 			break
 		}
-		if collectionId != nil && nft.Collection != collectionId {
+		index++
+		if nft.Collection.Int64() != collectionId.Int64() {
 			continue
 		}
-		nfts = append(nfts, &nft)
-		index++
+		nfts = append(nfts, nft)
 	}
 	return nfts
 }
 
 func GetNFTById(id int64) (NFT, error) {
-	return utils.NFTContract.Nft(utils.DefaultCallOpts(), big.NewInt(id))
+	nId, err := utils.NFTContract.NFTs(utils.DefaultCallOpts(), big.NewInt(id))
+	if err != nil {
+		return NFT{}, err
+	}
+	return utils.NFTContract.Nft(utils.DefaultCallOpts(), nId)
 }
