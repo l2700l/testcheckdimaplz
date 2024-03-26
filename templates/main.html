@@ -22,8 +22,11 @@
     <div>
         <h3>NFT Collections</h3>
         <div>
-            {{range .collections}}
-            <form action="/nft?collectionId={{.Id}}&addr={{.addr}}" method="GET">
+            {{range .collections }}
+            <form action="/nft" method="GET">
+                <input type="hidden" name="collectionId" value="{{.Id}}"/>
+                <input type="hidden" name="addr" value="{{$.addr}}"/>
+
                 <div>ID - {{.Id}}</div>
                 <div>Name - {{.Name}}</div>
                 <div>Description - {{.Description}}</div>
