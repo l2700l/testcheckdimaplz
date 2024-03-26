@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h6>Address: {{.addr}}</h6>
+        <h6>RefCode: {{.refCode}}</h6>
+        <h6>Discount: {{.discount}}</h6>
+    </div>
+    <div>
+        <form action="/ref-code?addr={{.addr}}" method="POST">
+            <input name="code" placeholder="ref code">
+            <button>Use</button>
+        </form>
+    </div>
+    <div>
+        <h3>NFT Collections</h3>
+        <div>
+            {{range .collections}}
+            <form action="/nft?collectionId={{.Id}}&addr={{.addr}}" method="GET">
+                <div>ID - {{.Id}}</div>
+                <div>Name - {{.Name}}</div>
+                <div>Description - {{.Description}}</div>
+                <button>Details</button>
+            </form>
+            {{end}}
+        </div>
+    </div>
+</body>
+</html>
