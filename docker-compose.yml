@@ -21,7 +21,7 @@ services:
     ports:
       - "30306:30306"
       - "1111:1111"
-    command: geth --datadir /eth-net/node1 --networkid 11111 --http --http.port 1111 --http.addr 0.0.0.0 --allow-insecure-unlock --http.api eth,net,debug,miner,web3,personal,txpool --port 30306 --bootnodes enode://f7c7ab3fb0641c7ae5dcc825b6e1ac7488ce8e15254debf2202051bea9c99319b01386880451a99c9de7ed9b3fbe44dbc7b15da3b096b73c41f96bb1078af711@bootnode:30305 --unlock 0x1A6be8c4C1DE78ae1Ef935D8B1344628f53BFad0 --password /eth-net/owner.txt --authrpc.port 8551 --syncmode full --http.vhosts=*
+    command: geth --datadir /eth-net/node1 --networkid 12345 --http --http.port 1111 --http.addr 0.0.0.0 --allow-insecure-unlock --http.api eth,net,debug,miner,web3,personal,txpool --port 30306 --bootnodes enode://1b6cbd0efa5ef05e2b41071431b2656d032dfdd37989d9840a91e4f95a65d3bf577137781d5b0f13706e1f107c0c2cee2e926cb719ce7bd709ddcaaad8c6e2d2@127.0.0.1:0?discport=30305 --unlock 0x09cb8451F147395300ccF38FC1372662f3ab9BeA --password /eth-net/owner.txt --authrpc.port 8551 --syncmode full --http.vhosts=*
     depends_on:
       - bootnode
     volumes:
@@ -31,7 +31,7 @@ services:
     ports:
       - "30307:30307"
       - "2222:2222"
-    command: geth --datadir eth-net/node2 --networkid 11111 --http --http.port 2222 --http.addr 0.0.0.0 --port 30307 --allow-insecure-unlock --bootnodes enode://f7c7ab3fb0641c7ae5dcc825b6e1ac7488ce8e15254debf2202051bea9c99319b01386880451a99c9de7ed9b3fbe44dbc7b15da3b096b73c41f96bb1078af711@bootnode:30305 --unlock 0xf51878d18c731033B51e5367de79ae9443815246 --password /eth-net/miner.txt --mine --miner.etherbase 0xf51878d18c731033B51e5367de79ae9443815246 --authrpc.port 8550 --syncmode full --http.vhosts=*
+    command: geth --datadir eth-net/node2 --networkid 12345 --http --http.port 2222 --http.addr 0.0.0.0 --port 30307 --allow-insecure-unlock --bootnodes enode://1b6cbd0efa5ef05e2b41071431b2656d032dfdd37989d9840a91e4f95a65d3bf577137781d5b0f13706e1f107c0c2cee2e926cb719ce7bd709ddcaaad8c6e2d2@127.0.0.1:0?discport=30305 --unlock 0x7be58583d0d36891b3d3f526D771fF54A06b0572 --password /eth-net/miner.txt --mine --miner.etherbase 0x7be58583d0d36891b3d3f526D771fF54A06b0572 --authrpc.port 8550 --syncmode full --http.vhosts=*
     depends_on:
       - node1
     volumes:

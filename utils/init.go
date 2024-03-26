@@ -2,27 +2,28 @@ package utils
 
 import (
 	"context"
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 	"math/big"
 	"professional/contract"
 	"professional/contract/nft"
 	"time"
+
+	"github.com/ethereum/go-ethereum/accounts"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/accounts/keystore"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 const (
-	Node2         = "http://0.0.0.0:2223"
-	Node2Keystore = "./eth-net/keystore"
+	Node2         = "http://node2:2222"
+	Node2Keystore = "/eth-net/node2/keystore"
 )
 
 var (
 	Owner    = common.HexToAddress("0x09cb8451F147395300ccF38FC1372662f3ab9BeA")
 	OwnerPWD = "owner"
-	Tom      = common.HexToAddress("0xd719CB5E381Be60E1A936CcE9fbAc5Ebc3c49DbF")
+	Tom      = common.HexToAddress("0x6Bf7Ea8Ea5530a794571332cd6f8A91a23bA9013")
 	TomPWD   = "tom"
 	Max      = common.HexToAddress("0x4718D993089E0E502f82746482C59bbcB5C1D977")
 	MaxPWD   = "max"
