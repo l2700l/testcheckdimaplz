@@ -16,7 +16,7 @@ import (
 
 const (
 	Node2         = "http://0.0.0.0:2223"
-	Node2Keystore = "./network/keystore"
+	Node2Keystore = "./eth-net/keystore"
 )
 
 var (

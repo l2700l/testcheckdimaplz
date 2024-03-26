@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v5.0.0) (token/ERC1155/ERC1155.sol)
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.0;
 
 // Важное по токену ERC1155:
 // 1) убрали комментарии
@@ -11,24 +11,7 @@ pragma solidity ^0.8.20;
 // 5) убрали все ивенты
 // 6) изменили array.unsafeMemoryAccess(id) в списках на array[id]
 
-// Храним структуры сверху, чтобы были доступны везде
-    struct NFT {
-        uint id;
-        string name;
-        string description;
-        string image;
-        mapping(address owner => uint) prices;
-        uint count;
-        mapping(address owner => uint) to_sales;
-        uint timestamp;
-        uint collection;
-    }
-    struct Collection {
-        uint id;
-        string name;
-        string description;
-        uint[] nftIds;
-    }
+
 
 // Главный контракт, в нем проводятся все расчеты между нормисами, деплоится именно он
 contract PROFIContract {
@@ -174,6 +157,24 @@ contract PROFIContract {
 }
 
 contract NFTContract {
+    // Храним структуры сверху, чтобы были доступны везде
+    struct NFT {
+        uint id;
+        string name;
+        string description;
+        string image;
+        mapping(address owner => uint) prices;
+        uint count;
+        mapping(address owner => uint) to_sales;
+        uint timestamp;
+        uint collection;
+    }
+    struct Collection {
+        uint id;
+        string name;
+        string description;
+        uint[] nftIds;
+    }
     // храним данные
     mapping(uint256 id => NFT) public nft;
     mapping(uint256 id => Collection) public collection;

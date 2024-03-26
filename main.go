@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/gin-gonic/gin"
 	"io"
@@ -38,6 +39,7 @@ func RedToMain(ctx *gin.Context, addr string) {
 }
 
 func main() {
+	fmt.Printf("syka")
 	time.Sleep(time.Second)
 	utils.Init()
 	c := gin.Default()

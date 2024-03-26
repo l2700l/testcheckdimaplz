@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="node_modules/ethers/dist/ethers.umd.min.js" type="application/javascript">
+    </script>
+
+</head>
+<body id="body">
+<button id="button" title="syka blyat">auth</button>
+<script>
+    const login = async () => {
+        window.provider = new ethers.BrowserProvider(window.ethereum);
+        window.signer = window.provider.getSigner();
+        window.accounts = await window.provider.send('eth_requestAccounts', []);
+        const a = document.createElement('a')
+        a.href = 'http://localhost:8080/password'
+        a.click()
+    }
+    document.getElementById('button').onclick = login
+</script>
+
+</body>
+</html>
